@@ -14,8 +14,10 @@ from bs4 import BeautifulSoup
 
 url = 'https://www.tradingview.com/markets/stocks-usa/market-movers-gainers/'
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.3'}
+req = Request(url, headers=headers)
+page = urlopen(req)
+soup = BeautifulSoup(page, 'html.parser')
 
-		
 
 
 
@@ -33,3 +35,5 @@ headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML
 #Limit = find with limit of 1
 #keyword: allText = Obj.find(id="title",class="text")
 
+for item in soup.find_all('a', class_='tv-screener__symbol'):
+    print(item.text)
